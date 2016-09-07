@@ -36,7 +36,7 @@ foreach ($it_require as $file) {
 unset($file, $filepath);
 
 /*------------------------------------*\
-	Theme Support
+	Theme Support, thumbnail sizes
 \*------------------------------------*/
 
 if (function_exists('add_theme_support')) {
@@ -51,17 +51,30 @@ if (function_exists('add_theme_support')) {
   add_theme_support('post-thumbnails');
 
   // Set Thumbnail size
-  // set_post_thumbnail_size($width, $height, false);
-
-  // add_image_size('large', 700, '', true); // Large Thumbnail
-  // add_image_size('medium', 250, '', true); // Medium Thumbnail
-  // add_image_size('small', 120, '', true); // Small Thumbnail
-  // add_image_size('custom-size', 700, 200, true); // Custom Thumbnail Size call using the_post_thumbnail('custom-size');
-
+  set_post_thumbnail_size( 770, 425 ); // default post thumbnail size
 
   // Localization Support
   load_theme_textdomain(' ideustheme', get_template_directory() . '/languages');
 }
+
+
+if ( function_exists( 'add_image_size' ) ) {
+   add_image_size('large', 770, '425', true); // Large Thumbnail
+   add_image_size('medium', 370, '203', true); // Medium Thumbnail
+   add_image_size('small', 123, '86', true); // Small Thumbnail
+}
+
+
+add_filter( 'image_size_names_choose', 'ideustheme_custom_sizes' );
+
+function ideustheme_custom_sizes( $sizes ) {
+  return array_merge( $sizes, array(
+    'large' => 'Large',
+    'medium' => 'Medium',
+    'small' => 'Small'
+  ) );
+}
+
 
 /*------------------------------------*\
 	Load  scripts, styles and fonts
@@ -105,8 +118,8 @@ function  ideustheme_styles()
   wp_register_style('style', get_template_directory_uri() . '/style.css', array(), '1.0', 'all');
   wp_enqueue_style('style');
 
-//  wp_register_style('main.min.css', get_template_directory_uri() . "'/assets/css/main.min.css?' .  filemtime('assets/css/main.min.css'); . '"', array(), '1.0', 'all');
-//  wp_enqueue_style('main.min.css');
+  wp_register_style('main.min.css', get_template_directory_uri() . '/assets/css/main.min.css?' .  filemtime('assets/css/main.min.css') , array(), '1.0', 'all');
+  wp_enqueue_style('main.min.css');
 }
 
 add_action('wp_enqueue_scripts', 'ideustheme_styles');
@@ -266,7 +279,7 @@ add_filter('document_title_separator', function () {
 // Custom excerpt ellipses
 function custom_excerpt_more()
 {
-  return '<a href="' . get_permalink($post->ID) . '" class="read-more">' . '… →' . '</a>';
+  return '… →' ;
 }
 
 add_filter('excerpt_more', 'custom_excerpt_more');

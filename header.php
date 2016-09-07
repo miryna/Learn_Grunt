@@ -92,7 +92,7 @@ $isHomepage = (basename($_SERVER['PHP_SELF']) == 'index.php');
       <div class="l-siteLogo">
         <div class="b-siteLogo" itemscope itemtype="http://schema.org/Organization">
           <a class="b-siteLogo__link" href="http://ideus.biz" itemprop="url">
-            <img class="b-siteLogo__icon" src="<?php echo get_template_directory_uri(); ?>/img/siteLogo__icon.png"
+            <img class="b-siteLogo__icon" src="<?php echo get_template_directory_uri(); ?>/assets/img/siteLogo__icon.png"
                  alt="iDeus" title="iDeus" itemprop="logo"/>
           </a>
         </div>
