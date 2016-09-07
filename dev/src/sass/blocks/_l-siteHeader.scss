@@ -1,0 +1,33 @@
+/**
+* @section Main Site Header
+*/
+.l-siteHeader {
+  position: relative;
+  height: #{$subHeaderHeight + 330px};
+  background: $colorPrimary url('../img/siteHeader-bg.jpg') 50% 0 no-repeat;
+
+  .-device_mobile & {
+    height: #{($subHeaderHeight * 2) + 330px};
+  }
+
+  .-page_home & {
+    height: #{$subHeaderHeight + 487px};
+  }
+
+  .-device_mobile .-page_home & {
+    height: #{($subHeaderHeight * 2) + 487px};
+  }
+}
+.b-siteHeader {
+  position: relative;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 87px 0 0;
+  width: $site-width;
+
+  .-device_mobile & {
+    padding-right: 20px;
+    padding-left: 20px;
+    width: 100%;
+  }
+}

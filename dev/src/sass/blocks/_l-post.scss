@@ -1,0 +1,89 @@
+/**
+* @section post
+*/
+.l-post {
+  margin: 0 0 30px;
+  background: #fff;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+.b-post {
+  position: relative;
+  padding: 25px 30px 85px;
+  color: $colorTextDark;
+
+  &__thumb {
+    display: block;
+    margin: -25px -30px 25px;
+    width: $contentWidth;
+
+    .-device_mobile & {
+      width: $siteMobileWidth;
+    }
+  }
+  &__title {
+    margin: 0 0 30px;
+    font: 36px/1em $BebasNeue;
+
+    .b-post.-type_archive & {
+      text-align: center;
+    }
+  }
+  &__content {
+    font: 14px/24px $RobotoSlab;
+
+    .-device_mobile & {
+      font-size: 18px;
+      line-height: 28px;
+    }
+
+    .b-post.-type_archive & {
+      text-align: center;
+    }
+  }
+}
+
+/**
+* @subsection postMeta
+*/
+.b-postMeta {
+  position: absolute;
+  bottom: 25px;
+  left: 25px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  &__item {
+    display: inline-block;
+    margin: 0 0 0 30px;
+    padding: 0 0 0 30px;
+    background: url('../img/postMeta__item-ico.png') no-repeat;
+    color: $colorMeta;
+    font: italic 14px/24px $Roboto;
+
+    .-device_mobile & {
+      font-size: 18px;
+    }
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &.-type_date {
+      background-position: 0 0;
+    }
+    &.-type_author {
+      background-position: 0 -100px;
+    }
+    &.-type_comments {
+      background-position: 0 -200px;
+    }
+  }
+  &__link {
+    color: inherit;
+    text-decoration: none;
+  }
+}

@@ -1,0 +1,12 @@
+/**
+* @section comments
+*/
+.l-comments {
+  @extend .g-clearfix;
+  margin: 30px 0 20px;
+  padding: 30px;
+  background: #fff;
+}
+.b-comments {
+  color: $colorTextDark;
+}

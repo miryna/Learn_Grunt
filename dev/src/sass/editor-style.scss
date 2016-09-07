@@ -1,0 +1,13 @@
+@charset "utf-8";
+
+@import 'mixins';
+@import 'fonts';
+@import 'settings';
+
+/* ==|== primary styles =====================================================
+   Authors: Valery Bogdanov
+   ========================================================================== */
+
+.-width_full {
+  width: 710px;
+}

@@ -1,0 +1,21 @@
+/**
+* @section Settings
+*/
+$site-width: 1170px;
+$site-width-tablet: 1024px;
+$site-width-mobile: 640px;
+
+$breakpoint-desktop: 'min-width: #{$site-width}';
+$breakpoint-tablet:  'min-width: #{$site-width-tablet}) and (max-width: #{$site-width - 1px}';
+$breakpoint-mobile:  'max-width: #{$site-width-tablet - 1px}';
+
+$subHeaderHeight: 57px;
+$siteMobileWidth: 640px;
+$contentWidth: 770px;
+
+$colorPrimary:   #e54241;
+$colorSecondary: #222429;
+$colorTextLight: #f5f6fa;
+$colorTextDark:  #36383d;
+$colorBorder:    #e1e1e1;
+$colorMeta:      #b4b4b4;

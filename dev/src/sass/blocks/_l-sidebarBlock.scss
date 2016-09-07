@@ -1,0 +1,41 @@
+/**
+* @section sidebarBlock
+*/
+.b-sidebarBlock {
+  position: relative;
+  margin: 24px 0 0;
+  padding: 22px 0 0;
+
+  &:before {
+    position: absolute;
+    top: 0;
+    height: 1px;
+    background: $colorBorder;
+    content: '';
+  }
+
+  &.-style_news {
+    &:before {
+      left: 0;
+      width: 123px;
+    }
+
+    .-device_mobile & {
+      display: none;
+    }
+  }
+  &.-style_social {
+    &:before {
+      width: 100%;
+    }
+
+    .b-sidebarBlock__title {
+      text-align: center;
+    }
+  }
+
+  &__title {
+    margin: 0 0 20px;
+    font: 24px/1em $BebasNeue;
+  }
+}

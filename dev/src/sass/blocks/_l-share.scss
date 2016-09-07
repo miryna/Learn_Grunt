@@ -1,0 +1,18 @@
+/**
+* @section share
+*/
+.l-share {}
+.b-share {
+  position: absolute;
+  right: 25px;
+  bottom: 25px;
+
+  &__title {
+    display: inline-block;
+    color: $colorPrimary;
+    font: italic 14px/24px $Roboto;
+  }
+  &__content {
+    display: inline-block;
+  }
+}

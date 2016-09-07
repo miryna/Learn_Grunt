@@ -1,0 +1,35 @@
+/**
+* @subsection siteSubHeader
+*/
+.l-siteSubHeader {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: $colorSecondary;
+}
+.b-siteSubHeader {
+  @extend .g-clearfix;
+  margin: 0 auto;
+  width: $site-width;
+  height: $subHeaderHeight;
+
+  .-device_mobile & {
+    width: 100%;
+    height: auto;
+  }
+
+  &__title {
+    float: left;
+    margin: 0;
+    color: $colorTextLight;
+    text-transform: uppercase;
+    font: 37px/#{$subHeaderHeight} $BebasNeue;
+
+    .-device_mobile & {
+      float: none;
+      padding-right: 20px;
+      padding-left: 20px;
+      text-align: center;
+    }
+  }
+}

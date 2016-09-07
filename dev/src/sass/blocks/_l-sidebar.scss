@@ -1,0 +1,13 @@
+/**
+* @section sidebar
+*/
+.l-sidebar {
+  float: right;
+  width: 370px;
+
+  .-device_mobile & {
+    float: none;
+    margin-top: 40px;
+    width: $siteMobileWidth;
+  }
+}

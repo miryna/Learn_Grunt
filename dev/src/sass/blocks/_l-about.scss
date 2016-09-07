@@ -1,0 +1,45 @@
+/**
+* @section about
+*/
+.l-about {}
+.b-about {
+  color: $colorTextDark;
+
+  &__title {
+    position: relative;
+    margin: 0 0 18px;
+    text-align: center;
+    font: 24px/1em $BebasNeue;
+
+    &:before,
+    &:after {
+      position: absolute;
+      top: 50%;
+      width: 123px;
+      height: 1px;
+      background: $colorBorder;
+      content: '';
+    }
+    &:before {
+      left: 0;
+    }
+    &:after {
+      right: 0;
+    }
+  }
+  &__thumb {
+    display: block;
+    margin: 0 0 20px;
+    width: 100%;
+  }
+  &__content {
+    padding: 0 10px;
+    text-align: center;
+    font: 14px/24px $RobotoSlab;
+
+    .-device_mobile & {
+      font-size: 18px;
+      line-height: 28px;
+    }
+  }
+}

@@ -1,0 +1,48 @@
+/**
+* @section lastNews
+*/
+.l-lastNews {}
+.b-lastNews {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  &__item {
+    @extend .g-clearfix;
+    margin: 0 0 33px;
+
+    &:last-child {margin-bottom: 0;}
+  }
+  &__thumb {
+    display: block;
+  }
+  &__thumbLink {
+    float: left;
+    display: block;
+  }
+  &__content {
+    margin: 0 0 0 140px;
+  }
+  &__name {
+    margin: -.4375em 0 0;
+    color: $colorPrimary;
+    font: 16px/1.5em $BebasNeue;
+  }
+  &__nameLink {
+    color: inherit;
+    text-decoration: none;
+
+    &:hover {
+      color: lighten($colorPrimary, 10%);
+    }
+  }
+  &__date {
+    color: $colorMeta;
+    font: italic 12px/2em $Roboto;
+  }
+  &__descr {
+    overflow: hidden;
+    color: $colorTextDark;
+    font: 14px/24px $RobotoSlab;
+  }
+}
