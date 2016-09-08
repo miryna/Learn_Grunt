@@ -92,10 +92,11 @@ function  ideustheme_modernizr()
 add_action('wp_enqueue_scripts', 'ideustheme_modernizr');
 */
 
+
 // Conditional script(s) lteie8
 function scripts_enqueue_lteie8()
 {
-  wp_register_script('ie8', get_template_directory_uri() . 'assets/js/legacy/ie8.js', array(), false, false);
+  wp_register_script('ie8', get_template_directory_uri() . '/assets/js/legacy/ie8.js', array(), false, false);
   wp_enqueue_script('ie8');
   wp_script_add_data('ie8', 'conditional', 'lte IE 8');
 }
@@ -105,19 +106,24 @@ add_action('wp_enqueue_scripts', 'scripts_enqueue_lteie8');
 
 function scripts_enqueue_js_main()
 {
-  wp_register_script('js-main', get_template_directory_uri() . '/assets/js/scripts.js?', array(''), filemtime(get_template_directory() . '/assets/js/scripts.js'), true);
+  $filemtime_js_main = filemtime(get_template_directory() . '/assets/js/scripts.js');
+
+  wp_register_script('js-main', get_template_directory_uri() . '/assets/js/scripts.js?', false, $filemtime_js_main, true);
   wp_enqueue_script('js-main');
 }
 
 add_action('wp_enqueue_scripts', 'scripts_enqueue_js_main');
 
+
 /*
-function scripts_enqueue_scripts_extra()
+function scripts_enqueue_js_main_extra()
 {
-  wp_register_script('scripts-extra', get_template_directory_uri() . 'assets/js/scripts-extra.js?', array('jquery'),  filemtime(get_template_directory().'/assets/js/scripts-extra.js'), true);
-  wp_enqueue_script('scripts-extra');
+  $filemtime_js_main_extra = filemtime(get_template_directory() . '/assets/js/scripts-extra.js');
+
+  wp_register_script('js-main-extra', get_template_directory_uri() . '/assets/js/scripts-extra.js?', false, $filemtime_js_main_extra, true);
+  wp_enqueue_script('js-main-extra');
 }
-add_action( 'wp_enqueue_scripts', 'scripts_enqueue_scripts_extra' );
+add_action('wp_enqueue_scripts', 'scripts_enqueue_js_main_extra');
 */
 
 
@@ -137,8 +143,9 @@ function  ideustheme_styles()
   wp_register_style('style', get_template_directory_uri() . '/style.css', false, false, false);
   wp_enqueue_style('style');
 
-  //wp_register_style('main-min', get_template_directory_uri() . '/assets/css/main.min.css?', false, filemtime(get_template_directory().'/assets/css/main.min.css'), true); // not works
-  wp_register_style('main-min', get_template_directory_uri() . '/assets/css/main.min.css?' . filemtime('assets/css/main.min.css'), false, false, false);
+  $version_filemtime = filemtime(get_template_directory() . '/assets/css/main.min.css');
+
+  wp_register_style('main-min', get_template_directory_uri() . '/assets/css/main.min.css?', array('style'), $version_filemtime, false);
   wp_enqueue_style('main-min');
 }
 

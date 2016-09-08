@@ -22,11 +22,6 @@
 
 <?php wp_footer(); ?>
 
-<?php $ideus_uri_scripts = get_template_directory_uri() . '/assets/js/scripts.js'; ?>
-<script src="  <?php echo $ideus_uri_scripts . '?' . filemtime($ideus_uri_scripts); ?>  "></script>
-
-<?php/*  $ideus_uri_scripts_extra = get_template_directory_uri() . '/assets/js/scripts-extra.js'; */ ?>
-<!--<script src="  <?php echo $ideus_uri_scripts_extra . '?' . filemtime($ideus_uri_scripts_extra); ?> "></script>-->
 
 <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
 <script>

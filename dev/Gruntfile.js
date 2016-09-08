@@ -35,6 +35,7 @@ module.exports = function(grunt) {
           sourceCSSDir    : 'src/sass',
           sourceCSSFiles  : '<%= sourceCSSDir %>' + '/**/*.scss',
           sourceCSSBase64 : '<%= sourceCSSDir %>' + '/_base64.scss',
+        /*  sourceCSSstyle : '<%= sourceCSSDir %>' + '../style.css',*/
 
           // JS
           sourceJSPlugins : [
