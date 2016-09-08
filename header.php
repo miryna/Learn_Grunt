@@ -68,7 +68,6 @@ $isHomepage = (basename($_SERVER['PHP_SELF']) == 'index.php');
   <!--[if lte IE 8]>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script>window.jQuery || document.write('<script src="<?php echo get_template_directory_uri();?>assets/js/vendor/jquery-1.11.3.min.js"><\/script>')</script>
-  <script src="js/legacy/ie8.js"></script>
   <![endif]-->
 
   <!--[if gte IE 9]><!-->
@@ -101,13 +100,12 @@ $isHomepage = (basename($_SERVER['PHP_SELF']) == 'index.php');
       <div class="b-siteInfo">
         <a class="b-siteInfo__link"<?php if (!is_front_page()): ?> href="<?php echo home_url(); ?>"<?php endif; ?>>
           <img class="b-siteInfo__logo" src="<?php echo get_template_directory_uri(); ?>/assets/img/siteInfo__logo.png"
-               alt="<?php echo get_bloginfo('name');; ?>"/>
+               alt="<?php echo get_bloginfo('name'); ?>"/>
         </a>
 
         <?php if (is_front_page()): ?>
-
-          <h1 class="b-siteInfo__title"><?php echo get_bloginfo('name'); ?></h1>
-          <div class="b-siteInfo__descr"><?php echo get_bloginfo('description'); ?></div>
+          <h1 class="b-siteInfo__title"><?php bloginfo('name'); ?></h1>
+          <div class="b-siteInfo__descr"><?php bloginfo('description'); ?></div>
         <?php endif; ?>
       </div>
 
@@ -128,20 +126,23 @@ $isHomepage = (basename($_SERVER['PHP_SELF']) == 'index.php');
     <div class="l-siteSubHeader">
       <div class="b-siteSubHeader">
 
-        <?php if (!is_single()): ?>
+        <?php if (!is_single()){ ?>
           <?php $tag = (!is_front_page()) ? 'h1' : 'div'; ?>
           <<?php echo $tag; ?> class="b-siteSubHeader__title">
 
-            <?php if (is_archive()): ?>
+            <?php if (is_front_page()): ?>
+              <?php echo _e('Home', 'ideustheme'); ?>
+
+            <?php  elseif (is_archive()): ?>
               <?php single_term_title('', true); ?>
 
             <?php else: ?>
               <?php echo wp_title(); ?>
 
-            <?php endif; //is_archive() ?>
+            <?php endif; //inner if ?>
 
         </<?php echo $tag; ?>>
-      <?php endif; //!is_single() ?>
+      <?php } //!is_single() ?>
 
       <?php ideustheme_socialMenu(); ?>
 

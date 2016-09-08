@@ -51,28 +51,29 @@ if (function_exists('add_theme_support')) {
   add_theme_support('post-thumbnails');
 
   // Set Thumbnail size
-  set_post_thumbnail_size( 770, 425 ); // default post thumbnail size
+  set_post_thumbnail_size(770, 425); // default post thumbnail size
 
   // Localization Support
   load_theme_textdomain(' ideustheme', get_template_directory() . '/languages');
 }
 
 
-if ( function_exists( 'add_image_size' ) ) {
-   add_image_size('large', 770, '425', true); // Large Thumbnail
-   add_image_size('medium', 370, '203', true); // Medium Thumbnail
-   add_image_size('small', 123, '86', true); // Small Thumbnail
+if (function_exists('add_image_size')) {
+  add_image_size('large', 770, '425', true); // Large Thumbnail
+  add_image_size('medium', 370, '203', true); // Medium Thumbnail
+  add_image_size('small', 123, '86', true); // Small Thumbnail
 }
 
 
-add_filter( 'image_size_names_choose', 'ideustheme_custom_sizes' );
+add_filter('image_size_names_choose', 'ideustheme_custom_sizes');
 
-function ideustheme_custom_sizes( $sizes ) {
-  return array_merge( $sizes, array(
+function ideustheme_custom_sizes($sizes)
+{
+  return array_merge($sizes, array(
     'large' => 'Large',
     'medium' => 'Medium',
     'small' => 'Small'
-  ) );
+  ));
 }
 
 
@@ -89,37 +90,56 @@ function  ideustheme_modernizr()
     wp_add_inline_script('modernizr', "{window.Modernizr || document.write('<script src=assets/js/vendor/modernizr-2.8.3.min.js></script>'}", 'after' );
 }
 add_action('wp_enqueue_scripts', 'ideustheme_modernizr');
-
-
-// Conditional script(s)
-function scripts_enqueue_lteie8()
-{
-  wp_register_script('ie8.js', get_template_directory_uri() . 'assets/js/legacy/ie8.js', array('jquery'), '1.0.0'); // Conditional script(s)
-  wp_enqueue_script('ie8.js');
-  wp_script_add_data('ie8.js', 'conditional', 'lte IE 8');
-}
-add_action( 'wp_enqueue_scripts', 'scripts_enqueue_lteie8' );
 */
 
-// dequeue the jquery library because it is connected  before wp_head();
-function dequeue_gquery()
+// Conditional script(s) lteie8
+function scripts_enqueue_lteie8()
 {
+  wp_register_script('ie8', get_template_directory_uri() . 'assets/js/legacy/ie8.js', array(), false, false);
+  wp_enqueue_script('ie8');
+  wp_script_add_data('ie8', 'conditional', 'lte IE 8');
+}
 
+add_action('wp_enqueue_scripts', 'scripts_enqueue_lteie8');
+
+
+function scripts_enqueue_js_main()
+{
+  wp_register_script('js-main', get_template_directory_uri() . '/assets/js/scripts.js?', array(''), filemtime(get_template_directory() . '/assets/js/scripts.js'), true);
+  wp_enqueue_script('js-main');
+}
+
+add_action('wp_enqueue_scripts', 'scripts_enqueue_js_main');
+
+/*
+function scripts_enqueue_scripts_extra()
+{
+  wp_register_script('scripts-extra', get_template_directory_uri() . 'assets/js/scripts-extra.js?', array('jquery'),  filemtime(get_template_directory().'/assets/js/scripts-extra.js'), true);
+  wp_enqueue_script('scripts-extra');
+}
+add_action( 'wp_enqueue_scripts', 'scripts_enqueue_scripts_extra' );
+*/
+
+
+// dequeue the jquery library because it is connected  before wp_head();
+function dequeue_jquery()
+{
   wp_dequeue_script('jquery');
   wp_deregister_script('jquery');
 }
 
-add_action('wp_enqueue_scripts', 'dequeue_gquery', 100);
+add_action('wp_print_scripts', 'dequeue_jquery', 100);
 
 
 // Load  styles
 function  ideustheme_styles()
 {
-  wp_register_style('style', get_template_directory_uri() . '/style.css', array(), '1.0', 'all');
+  wp_register_style('style', get_template_directory_uri() . '/style.css', false, false, false);
   wp_enqueue_style('style');
 
-  wp_register_style('main.min.css', get_template_directory_uri() . '/assets/css/main.min.css?' .  filemtime('assets/css/main.min.css') , array(), '1.0', 'all');
-  wp_enqueue_style('main.min.css');
+  //wp_register_style('main-min', get_template_directory_uri() . '/assets/css/main.min.css?', false, filemtime(get_template_directory().'/assets/css/main.min.css'), true); // not works
+  wp_register_style('main-min', get_template_directory_uri() . '/assets/css/main.min.css?' . filemtime('assets/css/main.min.css'), false, false, false);
+  wp_enqueue_style('main-min');
 }
 
 add_action('wp_enqueue_scripts', 'ideustheme_styles');
@@ -129,14 +149,14 @@ add_action('wp_enqueue_scripts', 'ideustheme_styles');
 	Register Menus
 \*------------------------------------*/
 
-// adds  custom classes for <li> and <a>  HTML tags
+// adds  custom classes for <li> and <a>  HTML tags for site Navigation
 class Walker_Nav_Menu_siteNavigation extends Walker_Nav_Menu_Custom_LI_A
 {
   public $LI_classes_custom = 'b-mainNavigation__item';
   public $A_classes_custom = 'b-mainNavigation__link';
 }
 
-// adds  custom classes for <li> and <a>  HTML tags
+// adds  custom classes for <li> and <a>  HTML tags for SosialMenu
 class Walker_Nav_Menu_socialMenu extends Walker_Nav_Menu_Custom_LI_A
 {
   public $LI_classes_custom = '';
@@ -216,7 +236,7 @@ function ideustheme_register_menu()
       'siteNavigation' => __('Header Site Navigation', 'ideustheme'), // Header Site Navigation
       'socialMenu_header' => __('Header Social Menu', 'ideustheme'), // Header Social Menu
       'socialMenu_sidebar' => __('Side Social Menu', 'ideustheme'), // Side Social Menu
-     ));
+    ));
 }
 
 add_action('init', 'ideustheme_register_menu');
@@ -237,7 +257,7 @@ if (function_exists('register_sidebar')) {
       'id' => 'side1',
       'before_widget' => '<div id="%1$s"  class="%2$s">',
       'after_widget' => "</div>",
-      'before_title' => '<h2  class="b-sidebarBlock__title">',
+      'before_title' => '<h2  class="b-about__title">',
       'after_title' => '</h2>'
     ));
   }
@@ -252,7 +272,7 @@ if (function_exists('register_sidebar')) {
   function ideustheme_register_widgets2()
   {
     register_sidebar(array(
-      'name' =>  __('Widget Area2', ' ideustheme'),
+      'name' => __('Widget Area2', ' ideustheme'),
       'id' => 'side2',
       'description' => __('widget area 2 for your site', ' ideustheme'),
       'class' => 'l-sidebar',
@@ -279,7 +299,7 @@ add_filter('document_title_separator', function () {
 // Custom excerpt ellipses
 function custom_excerpt_more()
 {
-  return '… →' ;
+  return '… →';
 }
 
 add_filter('excerpt_more', 'custom_excerpt_more');
@@ -290,11 +310,10 @@ function ideustheme_read_more()
 {
 
 
-  return '<div class="b-readMore"><a class="b-readMore__link" href="' . get_permalink() . '">' .  __('Continue reading', 'ideustheme') . '</a></div>';
+  return '<div class="b-readMore"><a class="b-readMore__link" href="' . get_permalink() . '">' . __('Continue reading', 'ideustheme') . '</a></div>';
 }
 
 add_filter('excerpt_more', 'custom_excerpt_more');
-
 
 
 // Search form layout
