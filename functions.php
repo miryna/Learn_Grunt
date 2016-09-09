@@ -78,7 +78,7 @@ function ideustheme_custom_sizes($sizes)
 
 
 /*------------------------------------*\
-	Load  scripts, styles and fonts
+	Load  scripts
 \*------------------------------------*/
 
 /*
@@ -93,15 +93,54 @@ add_action('wp_enqueue_scripts', 'ideustheme_modernizr');
 */
 
 
+// Deregister Wordpress JQuery
+// Register googleapis JQuery that will be placed within conditional tags
+function ideustheme_scripts_gte9_noie()
+{
+  wp_dequeue_script('jquery');
+  wp_deregister_script('jquery');
+
+  wp_enqueue_script('jquery', '//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js', array(), false, false);
+}
+
+add_action('wp_enqueue_scripts', 'ideustheme_scripts_gte9_noie', 2);
+
+// Allows us to add conditional tags in output script
+add_filter('script_loader_tag', function ($tag, $handle) {
+  if ($handle === 'jquery') {
+    $tag = "<!--[if gte IE 9]><!-->$tag<!--<![endif]-->";
+  }
+  return $tag;
+}, 10, 2);
+
+
+// Register googleapis JQuery that will be placed within conditional tags
+function ideustheme_scripts_lteie8()
+{
+  wp_enqueue_script('jquery-lteie8', '//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js', array(), false, false);
+}
+
+add_action('wp_enqueue_scripts', 'ideustheme_scripts_lteie8', 3);
+
+// Allows us to add conditional tags in output script
+add_filter('script_loader_tag', function ($tag, $handle) {
+  if ($handle === 'jquery-lteie8') {
+    $tag = "<!--[if lte IE 8]>$tag<![endif]-->";
+  }
+  return $tag;
+}, 10, 2);
+
+/*---------------------------------------------------------------------------------*/
+
 // Conditional script(s) lteie8
-function scripts_enqueue_lteie8()
+function ideustheme_scripts2_lteie8()
 {
   wp_register_script('ie8', get_template_directory_uri() . '/assets/js/legacy/ie8.js', array(), false, false);
   wp_enqueue_script('ie8');
   wp_script_add_data('ie8', 'conditional', 'lte IE 8');
 }
 
-add_action('wp_enqueue_scripts', 'scripts_enqueue_lteie8');
+add_action('wp_enqueue_scripts', 'ideustheme_scripts2_lteie8');
 
 
 function scripts_enqueue_js_main()
@@ -127,15 +166,9 @@ add_action('wp_enqueue_scripts', 'scripts_enqueue_js_main_extra');
 */
 
 
-// dequeue the jquery library because it is connected  before wp_head();
-function dequeue_jquery()
-{
-  wp_dequeue_script('jquery');
-  wp_deregister_script('jquery');
-}
-
-add_action('wp_print_scripts', 'dequeue_jquery', 100);
-
+/*------------------------------------*\
+	Load styles and fonts
+\*------------------------------------*/
 
 // Load  styles
 function  ideustheme_styles()
@@ -150,6 +183,16 @@ function  ideustheme_styles()
 }
 
 add_action('wp_enqueue_scripts', 'ideustheme_styles');
+
+
+//Load fonts
+function ideustheme_fonts()
+{
+  $protocol = is_ssl() ? 'https' : 'http';
+  wp_enqueue_style('googlefonts', $protocol . '://fonts.googleapis.com/css?family=Roboto:400,400italic|Roboto+Slab&subset=latin,cyrillic');
+}
+
+add_action('wp_enqueue_scripts', 'ideustheme_fonts');
 
 
 /*------------------------------------*\

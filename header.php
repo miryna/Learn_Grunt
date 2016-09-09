@@ -59,21 +59,10 @@ $isHomepage = (basename($_SERVER['PHP_SELF']) == 'index.php');
   <link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/img/favicon.ico"/>
   <link rel="apple-touch-icon" href="<?php echo get_template_directory_uri(); ?>/img/apple-touch-icon.png">
 
-  <link rel="stylesheet"
-        href="//fonts.googleapis.com/css?family=Roboto:400,400italic|Roboto+Slab&subset=latin,cyrillic"/>
 
   <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
   <script>window.Modernizr || document.write('<script src="<?php echo get_template_directory_uri();?>/assets/js/vendor/modernizr-2.8.3.min.js"><\/script>')</script>
 
-  <!--[if lte IE 8]>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <script>window.jQuery || document.write('<script src="<?php echo get_template_directory_uri();?>assets/js/vendor/jquery-1.11.3.min.js"><\/script>')</script>
-  <![endif]-->
-
-  <!--[if gte IE 9]><!-->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-  <script>window.jQuery || document.write('<script src="<?php echo get_template_directory_uri();?>/assets/js/vendor/jquery-2.1.4.min.js"><\/script>')</script>
-  <!--<![endif]-->
 
   <?php wp_head(); ?>
 </head>
