@@ -59,11 +59,6 @@ $isHomepage = (basename($_SERVER['PHP_SELF']) == 'index.php');
   <link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/img/favicon.ico"/>
   <link rel="apple-touch-icon" href="<?php echo get_template_directory_uri(); ?>/img/apple-touch-icon.png">
 
-
-  <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-  <script>window.Modernizr || document.write('<script src="<?php echo get_template_directory_uri();?>/assets/js/vendor/modernizr-2.8.3.min.js"><\/script>')</script>
-
-
   <?php wp_head(); ?>
 </head>
 
@@ -80,7 +75,8 @@ $isHomepage = (basename($_SERVER['PHP_SELF']) == 'index.php');
       <div class="l-siteLogo">
         <div class="b-siteLogo" itemscope itemtype="http://schema.org/Organization">
           <a class="b-siteLogo__link" href="http://ideus.biz" itemprop="url">
-            <img class="b-siteLogo__icon" src="<?php echo get_template_directory_uri(); ?>/assets/img/siteLogo__icon.png"
+            <img class="b-siteLogo__icon"
+                 src="<?php echo get_template_directory_uri(); ?>/assets/img/siteLogo__icon.png"
                  alt="iDeus" title="iDeus" itemprop="logo"/>
           </a>
         </div>
@@ -116,21 +112,22 @@ $isHomepage = (basename($_SERVER['PHP_SELF']) == 'index.php');
       <div class="b-siteSubHeader">
 
         <?php if (!is_single()){ ?>
-          <?php $tag = (!is_front_page()) ? 'h1' : 'div'; ?>
-          <<?php echo $tag; ?> class="b-siteSubHeader__title">
+        <?php $tag = (!is_front_page()) ? 'h1' : 'div'; ?>
+        <<?php echo $tag; ?> class="b-siteSubHeader__title">
 
-            <?php if (is_front_page()): ?>
-              <?php echo _e('Home', 'ideustheme'); ?>
+        <?php if (is_front_page()): ?>
+          <?php echo _e('Home', 'ideustheme'); ?>
 
-            <?php  elseif (is_archive()): ?>
-              <?php single_term_title('', true); ?>
+        <?php elseif (is_archive()): ?>
+          <?php single_term_title('', true); ?>
 
-            <?php else: ?>
-              <?php echo wp_title(); ?>
+        <?php
+        else: ?>
+          <?php echo wp_title(); ?>
 
-            <?php endif; //inner if ?>
+        <?php endif; //inner if ?>
 
-        </<?php echo $tag; ?>>
+      </<?php echo $tag; ?>>
       <?php } //!is_single() ?>
 
       <?php ideustheme_socialMenu(); ?>
