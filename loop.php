@@ -16,7 +16,7 @@ if (have_posts()): while (have_posts()) : the_post(); ?>
 
       <?php if (has_post_thumbnail()) { ?>
         <a class="b-post__thumbLink" href="<?php the_permalink(); ?>" alt="<?php the_title_attribute(); ?>">
-          <?php the_post_thumbnail('post-thumbnail', 'class="b-post__thumb"'); ?>
+          <?php the_post_thumbnail('post-thumbnail', 'class=b-post__thumb'); ?>
         </a>
       <?php } ?>
 
@@ -25,7 +25,7 @@ if (have_posts()): while (have_posts()) : the_post(); ?>
       <?php /* if ( is_archive() || is_search() ) : // Only display Excerpts for archives & search */ ?>
 
       <div class="b-post__content b-text">
-        <p><?php echo get_the_excerpt() . custom_excerpt_more(); ?></p>
+        <p><?php the_content('… →'); ?></p>
       </div>
 
       <?php echo ideustheme_read_more(); ?>
@@ -74,7 +74,9 @@ if (have_posts()): while (have_posts()) : the_post(); ?>
 <?php else: ?>
 
   <section class="l-post">
-    <h3><?php _e('Sorry, nothing to display.', 'ideustheme'); ?></h3>
+    <div class="b-post__content b-text">
+    <p b-text><?php _e('Sorry, nothing to display.', 'ideustheme'); ?></p>
+      </div>
   </section>
 
 

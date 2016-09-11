@@ -63,7 +63,7 @@ $isHomepage = (basename($_SERVER['PHP_SELF']) == 'index.php');
 </head>
 
 <body
-  class="<?php echo implode(' ', get_body_class()) . ' -page_' . get_page_uri(); ?><?php echo (!is_front_page()) ? ' -page_inner' : ''; ?>">
+  class="<?php echo implode(' ', get_body_class()) . ' -page_' . get_page_uri(); ?><?php echo (!is_front_page()) ? ' -page_inner' : ' -page_home'; ?>">
 <!--[if lt IE 8]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
   your browser</a> to improve your experience.</p>

@@ -7,6 +7,133 @@
   padding: 30px;
   background: #fff;
 }
+
 .b-comments {
   color: $colorTextDark;
+  font: 14px/24px $Roboto;
+
+  &__list {
+    margin-bottom: 30px;
+  }
+
+  &__title,
+  &__beforeFormTitle {
+    margin: 0 0 20px;
+    font: 24px/1em $BebasNeue;
+  }
+
+  &__assistiveText {
+    font: italic 14px/24px $Roboto;
+
+    code {
+      color: $colorMeta;
+    }
+  }
+
+  &__loggedInAs a,
+  &__mustLogIn a {
+    color: $colorPrimary;
+    text-decoration: none;
+
+    &:hover,
+    &:hover {
+      color: #eb6f6e;
+    }
+  }
+
+  &__formAllowedTags {
+    line-height: 1em;
+
+    span {
+      display: block;
+      padding-bottom: 6px;
+    }
+  }
+
+  &__formTextarea {
+    padding-right: 20px;
+
+    textarea {
+      width: 100%;
+      border-color: $colorBorder;
+      padding: 10px;
+      font: 14px/24px $RobotoSlab;
+      outline: none;
+      -moz-appearance: none;
+      border: 1px solid #e1e1e1;
+      overflow: auto;
+    }
+  }
+
+  &__formSubmit {
+    margin: 30px 0 0;
+    text-align: center;
+
+    input.submit {
+      background: $colorPrimary none repeat scroll 0 0;
+      color: #fff;
+      display: inline-block;
+      font: 18px/48px $BebasNeue;
+      min-width: 200px;
+      text-align: center;
+      text-decoration: none;
+      text-transform: uppercase;
+      outline: none;
+      -moz-appearance: none;
+      border: none;
+
+      &:hover {
+        background: #f5f6fa none repeat scroll 0 0;
+        color: $colorPrimary;
+      }
+    }
+  }
+
+  &__formFields {
+    padding-right: 20px;
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-color: $colorBorder;
+      font: 14px/24px $RobotoSlab;
+      outline: none;
+      -moz-appearance: none;
+      border: 1px solid #e1e1e1;
+      overflow: auto;
+    }
+  }
+
+  &__replyTitle {
+    display: inline-block;
+    margin-top: 10px;
+    font: italic normal 14px/24px $Roboto;
+
+    small {
+      font-size: 100%;
+    }
+
+     a {
+      color: $colorPrimary;
+      text-decoration: none;
+    }
+
+     a:hover {
+      color: #eb6f6e;
+    }
+  }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

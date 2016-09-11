@@ -9,3 +9,209 @@ Author URI:         http://timeintent.com
 License:            MIT License
 License URI:        http://opensource.org/licenses/MIT
 */
+
+
+/**
+ * l-comments
+ *
+ *  /dev/src/sass/blocks/_l-comments.scss
+ */
+
+/*
+.b-comments{
+    font: 14px/24px Roboto,Arial,Helvetica Neue,Helvetica,sans-serif;
+}
+
+.b-comments__list{
+    margin-bottom: 30px;
+}
+
+.b-comments__title,
+.b-comments__beforeFormTitle{
+    margin: 0 0 20px;
+    font: 24px/1em Bebas Neue,Arial,Helvetica Neue,Helvetica,sans-serif;
+}
+
+.b-comments__assistiveText{
+    font: italic 14px/24px Roboto,Arial,Helvetica Neue,Helvetica,sans-serif;
+}
+.b-comments__assistiveText code{
+  color: #b4b4b4;
+}
+
+.b-comments__loggedInAs a,
+.b-comments__mustLogIn a{
+    color: #e54241;
+    text-decoration: none;
+}
+.b-comments__loggedInAs a:hover,
+.b-comments__mustLogIn a:hover{
+    color: #eb6f6e;
+}
+
+.b-comments__formAllowedTags{
+    line-height: 1em;
+}
+.b-comments__formAllowedTags span{
+    display: block;
+    padding-bottom: 6px;
+}
+.b-comments__formTextarea{
+    padding-right: 20px;
+}
+
+.b-comments__formTextarea textarea{
+    width: 100%;
+   border-color: #e1e1e1;
+    padding: 10px;
+    font: 14px/24px Roboto Slab,serif;
+    outline: none;
+    -moz-appearance: none;
+    border: 1px solid #e1e1e1;
+    overflow: auto;
+}
+
+.b-comments__formSubmit{
+    margin: 30px 0 0;
+    text-align: center;
+}
+.b-comments__formSubmit input.submit{
+    background: #e54241 none repeat scroll 0 0;
+    color: #fff;
+    display: inline-block;
+    font: 18px/48px Bebas Neue,Arial,Helvetica Neue,Helvetica,sans-serif;
+    min-width: 200px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    outline: none;
+    -moz-appearance: none;
+    border: none;
+}
+
+.b-comments__formSubmit input.submit:hover{
+    background: #f5f6fa none repeat scroll 0 0;
+    color: #e54241;
+}
+
+.b-comments__formFields{
+    padding-right: 20px;
+}
+
+.b-comments__formFields input{
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-color: #e1e1e1;
+    font: 14px/24px Roboto Slab,serif;
+    outline: none;
+    -moz-appearance: none;
+    border: 1px solid #e1e1e1;
+    overflow: auto;
+}
+*/
+
+/**
+ * l-comment
+ *
+ *
+ */
+
+.l-comment{
+    margin-bottom: 20px;
+    list-style-type: none;
+}
+
+.l-comment ul{
+    margin-top: 20px;
+}
+
+.b-comment{
+    position: relative;
+}
+
+.b-comment::after{
+    position: absolute;
+    bottom: 0;
+    height: 1px;
+    width: 100px;
+    content: "";
+    border-bottom: 1px solid  #e1e1e1;
+}
+
+.b-comment__metaItem,
+.b-comments__replyTitle{
+    display: inline-block;
+    font: italic normal 14px/24px Roboto,Arial,Helvetica Neue,Helvetica,sans-serif;
+}
+
+.b-comments__replyTitle small{
+    font-size: 100%;
+}
+
+.b-comments__replyTitle{
+   margin-top: 10px;
+}
+
+.b-comment__metaData{
+   position: absolute;
+    top: 10px;
+    right: 0;
+}
+
+.b-comment__metaData .b-comment__author,
+.b-comment__metaData .b-comment__datetime{
+    color: #b4b4b4;
+    margin: 0 0 0 10px;
+    padding: 0 0 0 30px;
+}
+
+.b-comment__metaData .b-comment__author{
+  width: 88px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0) url("assets/img/postMeta__item-ico.png") no-repeat scroll 0 -100px;
+}
+
+.b-comment__metaData .b-comment__datetime{
+    width: 80px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0) url("assets/img/postMeta__item-ico.png") no-repeat scroll 0 0;
+}
+
+.b-comment__metaLinks .b-comment__metaItem{
+    margin-right: 15px;
+}
+
+.b-comment__metaLinks{
+    margin-top: -10px;
+    padding-bottom: 10px;
+}
+
+.b-comment__metaLinks a,
+.b-comments__replyTitle a{
+    color: #e54241;
+    text-decoration: none;
+}
+
+.b-comment__metaLinks a:hover,
+.b-comments__replyTitle a:hover{
+    color: #eb6f6e;
+}
+
+.b-comment__content{
+    font: 14px/24px Roboto Slab,serif;
+}
+
+
+/**
+ * l-widget
+ *
+ *
+ */
+
+
+
+
+
+
+

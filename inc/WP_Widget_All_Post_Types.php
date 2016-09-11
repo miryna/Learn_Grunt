@@ -79,12 +79,12 @@ class WP_Widget_All_Post_Types extends WP_Widget
   {
     wp_reset_query();
     wp_reset_postdata();
-
     extract( $args );
-
     ?>
 
   <div class="b-sidebarBlock -style_news">
+    <div class="l-lastNews">
+      <ul class="b-lastNews">
 
     <?php
     $title = apply_filters( 'widget_title', $instance['title'] );
@@ -92,13 +92,11 @@ class WP_Widget_All_Post_Types extends WP_Widget
       echo $args['before_title'] . $title . $args['after_title'];
     ?>
 
-    <ul class="b-lastNews">
+
 
     <?php
-
     global $wpdb;
     global $post;
-
 
     $instance_custom_post_type = $instance['custom_post_type'];
 
@@ -114,19 +112,19 @@ class WP_Widget_All_Post_Types extends WP_Widget
     else {
       foreach ($result as $post) {
         setup_postdata($post);
-        ?>
+    ?>
 
-      <?php $this_external_link = get_post_meta(get_the_ID(), 'lastnews_link', true);   ?>
+      <?php $this_external_link = get_post_meta(get_the_ID(), 'lastnews_link', true);?>
 
       <li class="b-lastNews__item">
 
-        <a class="b-lastNews__thumbLink" href="<?php echo $this_external_link; ?> ">
+        <a class="b-lastNews__thumbLink" target="_blank" href="<?php echo $this_external_link; ?> ">
           <?php the_post_thumbnail('post-thumbnail', 'b-lastNews__thumb"'); ?>
         </a>
 
         <div class="b-lastNews__content">
           <h3 class="b-lastNews__name">
-            <a class="b-lastNews__nameLink" href="<?php  echo $this_external_link; ?> "> <?php the_title(); ?>
+            <a class="b-lastNews__nameLink" target="_blank" href="<?php  echo $this_external_link; ?> "> <?php the_title(); ?>
             </a>
           </h3>
 
@@ -143,23 +141,20 @@ class WP_Widget_All_Post_Types extends WP_Widget
 
     <?php // endwhile; endif;  ?>
 
-      <?php
+    <?php
         wp_reset_postdata();
       }
     }
-
     ?>
 
-    </ul>
-  </div>
+      </ul>
+    </div>
+  </div><!--.b-sidebarBlock-->
 
   <?php
-
   }
-
 }
 
 add_action('widgets_init', function () {
   register_widget('WP_Widget_All_Post_Types');
 });
-

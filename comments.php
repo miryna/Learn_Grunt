@@ -1,99 +1,121 @@
 <?php
 /**
- * @package WordPress
- * @subpackage ideustheme
- */
+ * The template for displaying Comments.
+ *
+ * The area of the page that contains both current comments
+ * and the comment form. The actual display of comments is
+ * handled by a callback to ideustheme_walker_comment() which is
+ * located in the inc/Ideustheme_Walker_Comment.php file.
+ *
+  */
 ?>
 
-<div id="comments">
-	<!-- Prevents loading the file directly -->
-	<?php if(!empty($_SERVER['SCRIPT_FILENAME']) && 'comments.php' == basename($_SERVER['SCRIPT_FILENAME'])) : ?>
-	    <?php die('Please do not load this page directly or we will hunt you down. Thanks and have a great day!'); ?>
-	<?php endif; ?>
-	
-	<!-- Password Required -->
-	<?php if(!empty($post->post_password)) : ?>
-	    <?php if($_COOKIE['wp-postpass_' . COOKIEHASH] != $post->post_password) : ?>
-	    <?php endif; ?>
-	<?php endif; ?>
-	
-	<?php $i++; ?> <!-- variable for alternating comment styles -->
-	<?php if($comments) : ?>
-			<h3><?php comments_number(__('No comments', 'ideustheme'), __('One comment', 'ideustheme'), __('% comments', 'ideustheme')); ?></h3>
-	    <ol>
-	    <?php foreach($comments as $comment) : ?>
-	    	<?php $comment_type = get_comment_type(); ?> <!-- checks for comment type -->
-	    	<?php if($comment_type == 'comment') { ?> <!-- outputs only comments -->
-		        <li id="comment-<?php comment_ID(); ?>" class="comment <?php if($i&1) { echo 'odd';} else {echo 'even';} ?> <?php $user_info = get_userdata(1); if ($user_info->ID == $comment->user_id) echo 'authorComment'; ?> <?php if ($comment->user_id > 0) echo 'user-comment'; ?>">
-		            <?php if ($comment->comment_approved == '0') : ?> <!-- if comment is awaiting approval -->
-		                <p class="waiting-for-approval">
-		                	<em><?php _e('Your comment is awaiting approval.', 'ideustheme'); ?></em>
-		                </p>
-		            <?php endif; ?>
-		            <div class="comment-text">
-			            <?php comment_text(); ?>
-		            </div><!--.commentText-->
-		            <div class="comment-meta">
-		            	<?php edit_comment_link(__('Edit Comment', 'ideustheme'), '', ''); ?>
-		            	<?php comment_type(); ?> by <?php comment_author_link(); ?> on <?php comment_date(); ?> at <?php comment_time(); ?>
-		            	<p class="gravatar"><?php if(function_exists('get_avatar')) { echo get_avatar($comment, '36'); } ?></p>
-		            </div><!--.commentMeta-->
-		        </li>
-			<?php } else { $trackback = true; } ?>
-	    <?php endforeach; ?>
-	    </ol>
-	    <?php if ($trackback == true) { ?><!-- checks for comment type: trackback -->
-	    <h3>Trackbacks</h3>
-		    <ol>
-		    	<!-- outputs trackbacks -->
-			    <?php foreach ($comments as $comment) : ?>
-				    <?php $comment_type = get_comment_type(); ?>
-				    <?php if($comment_type != 'comment') { ?>
-					    <li><?php comment_author_link() ?></li>
-				    <?php } ?>
-			    <?php endforeach; ?>
-		    </ol>
-	    <?php } ?>
-	<?php else : ?>
-	    <p><?php _e('No comments yet. You should be kind and add one!', 'ideustheme'); ?></p>
-	<?php endif; ?>
-	
-	<div id="comments-form">
-		<?php if(comments_open()) : ?>
-			<?php if(get_option('comment_registration') && !$user_ID) : ?>
-				<p><?php _e('Our apologies, you must be ', 'ideustheme'); ?><a href="<?php echo get_option('siteurl'); ?>/wp-login.php?redirect_to=<?php echo urlencode(get_permalink()); ?>"><?php _e('logged in', 'ideustheme'); ?></a><?php _e(' to post a comment.', 'ideustheme'); ?></p><?php else : ?>
-				<form action="<?php echo get_option('siteurl'); ?>/wp-comments-post.php" method="post" id="commentform">
-					<?php if($user_ID) : ?>
-						<p><?php _e('Logged in as ', 'ideustheme'); ?><a href="<?php echo get_option('siteurl'); ?>/wp-admin/profile.php"><?php echo $user_identity; ?></a>. <a href="<?php echo get_option('siteurl'); ?>/wp-login.php?action=logout" title="Log out of this account"><?php _e('Log out', 'ideustheme'); ?> &raquo;</a></p>
-						<?php else : ?>
-			            	<p><?php _e('Allowed HTML tags:', 'ideustheme'); ?> <?php echo allowed_tags(); /* outputs the html tags that are allowed in comments */ ?></p>
-			            	<p>
-								<label for="author"><small><?php _e('Name', 'ideustheme'); ?> <?php if($req) echo "(required)"; ?></small></label>
-								<input type="text" name="author" id="author" value="<?php echo $comment_author; ?>" size="22" tabindex="1" />
-							</p>
-							<p>
-								<label for="email"><small><?php _e('Mail (will not be shared)', 'ideustheme'); ?> <?php if($req) echo "(required)"; ?></small></label>
-								<input type="text" name="email" id="email" value="<?php echo $comment_author_email; ?>" size="22" tabindex="2" />
-							</p>
-							<p>
-								<label for="url"><small><?php _e('Website', 'ideustheme'); ?></small></label>
-								<input type="text" name="url" id="url" value="<?php echo $comment_author_url; ?>" size="22" tabindex="3" />
-							</p>
-						<?php endif; ?>
-							<p>
-								<label for="comment"><small><?php _e('Comment', 'ideustheme'); ?></small></label>
-								<textarea name="comment" id="comment" cols="100%" rows="10" tabindex="4"></textarea>
-							</p>
-							<p>
-								<input name="submit" type="submit" id="submit" tabindex="5" value="<?php echo _e('Submit Comment','ideustheme' ); ?>" />
-								<input type="hidden" name="comment_post_ID" value="<?php echo $id; ?>" />
-							</p>
-				         <?php do_action('comment_form', $post->ID); ?>
-			     </form>
+<?php
+	// File Security Check
+	if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-			<?php endif; ?>
-		<?php else : ?>
-			<p><?php _e('The comments are closed.', 'ideustheme'); ?></p>
-		<?php endif; ?>
-	</div><!--#commentsForm-->
-</div><!--#comments-->
+	/*
+	 * If the current post is protected by a password and
+	 * the visitor has not yet entered the password we will
+	 * return early without loading the comments.
+	 */
+	if ( post_password_required() || ( !comments_open() && 0 == get_comments_number() ) ) {
+		return;
+	}
+?>
+
+    <section class="l-comments">
+      <div class="b-comments" id="comments">
+
+
+	<?php if ( have_comments() ) : ?>
+
+			<div class="b-comments__title"><?php printf( _nx( '1 Comment', '%1$s Comments', get_comments_number(), 'comments title', 'ideustheme' ), number_format_i18n( get_comments_number() ) ); ?>
+        <span class="separator">
+        </span>
+      </div>
+
+
+		<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : // are there comments to navigate through ?>
+		<nav class="b-comments__navigation" role="navigation" id="comments-nav-above" >
+			<h1 class="b-comments__assistiveText"><?php _e( 'Comment navigation', 'ideustheme' ); ?></h1>
+			<div class="b-comments__navPrevious"><?php previous_comments_link( __( '&larr; Older Comments', 'ideustheme' ) ); ?></div>
+			<div class="b-comments__navNext"><?php next_comments_link( __( 'Newer Comments &rarr;', 'ideustheme' ) ); ?></div>
+		</nav><!-- .b-comments__navigation -->
+		<?php endif; // check for comment navigation ?>
+
+		<ul class="b-comments__list">
+			<?php
+				/* Loop through and list the comments. Tell wp_list_comments()
+				 * to use ideustheme_comment() to format the comments.
+				 */
+
+			wp_list_comments( array( 'callback' => 'ideustheme_walker_comment' ) );
+
+			?>
+		</ul><!-- .b-commentList -->
+
+		<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : // are there comments to navigate through ?>
+		<nav role="navigation" id="comments-nav-below" class="b-comments__navigation">
+        <h1 class="b-comments__assistiveText"><?php _e( 'Comment navigation', 'ideustheme' ); ?></h1>
+        <div class="b-comments__navPrevious"><?php previous_comments_link( __( '&larr; Older Comments', 'ideustheme' ) ); ?></div>
+        <div class="b-comments__navNext"><?php next_comments_link( __( 'Newer Comments &rarr;', 'ideustheme' ) ); ?></div>
+		</nav><!-- .b-comments__navigation -->
+		<?php endif; // check for comment navigation ?>
+
+	<?php endif; // have_comments() ?>
+
+	<?php
+		// If comments are closed and there are comments, let's leave a little note, shall we?
+	if ( ! comments_open() && '0' != get_comments_number() && post_type_supports( get_post_type(), 'comments' ) ) :
+	?>
+		<p class="b-comments__noComments"><?php _e( 'Comments are closed.', 'ideustheme' ); ?></p>
+	<?php endif; ?>
+
+	<?php
+	$commenter = wp_get_current_commenter();
+	$req = get_option( 'require_name_email' );
+	$aria_req = ( $req ? " aria-required='true'" : '' );
+	$required_text = sprintf( ' ' . __('Required fields are marked %s', 'ideustheme'), '<span class="b-comments__required">*</span>' );
+
+	$comment_form_args = array(
+
+		'title_reply' => '',
+
+		'title_reply_to' => '',
+
+    'class_form' => 'b-comments__form',
+
+		'fields'	=> apply_filters( 'comment_form_default_fields', array(
+
+			'author' => '<div class="b-comments__formFields"><span class="b-comments__formAuthor">' . '<label class="b-comments__assistiveText" for="author">' . __( '', 'ideustheme' ) . '</label><input id="author" name="author" type="text" placeholder="' . __( 'Name&#42;', 'ideustheme' ) . '" value="' . esc_attr( $commenter['comment_author'] ) . '" size="30"' . $aria_req . ' /></span>',
+
+			'email' => '<span class="b-comments__formEmail"><label class="b-comments__assistiveText" for="email">' . __( '', 'ideustheme' ) . '</label><input id="email" name="email" type="text" placeholder="' . __( 'Email&#42;', 'ideustheme' ) . '" value="' . esc_attr(  $commenter['comment_author_email'] ) . '" size="30"' . $aria_req . ' /></span>',
+
+			'url' => '<span class="b-comments__formUrl"><label class="b-comments__assistiveText" for="url">' . __( '', 'ideustheme' ) . '</label><input id="url" name="url" type="text" placeholder="' . __( 'Website', 'ideustheme' ) . '" value="' . esc_attr( $commenter['comment_author_url'] ) . '" size="30" /></span></div>'
+
+			)
+		),
+
+		'comment_field'	=> '<p class="b-comments__formTextarea"><label class="b-comments__assistiveText" for="comment">' . __( '', 'ideustheme' ) . '</label><textarea id="comment" placeholder="' . __( 'Comment', 'ideustheme' ) . '" name="comment" cols="45" rows="5" aria-required="true"></textarea></p>',
+
+		'comment_notes_after' => '<p class="b-comments__formAllowedTags text-small wf-mobile-hidden">' . sprintf( __( '<span>You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes:</span> %s ', 'ideustheme' ), ' <code>' . allowed_tags() . '</code>' ) . '</p>',
+
+		'must_log_in' => '<p class="b-comments__mustLogIn text-small">' .  sprintf( __( 'You must be <a href="%s">logged in</a> to post a comment.', 'ideustheme' ), wp_login_url( apply_filters( 'the_permalink', get_permalink( ) ) ) ) . '</p>',
+
+		'logged_in_as' => '<p class="b-comments__loggedInAs text-small">' . sprintf( __( 'Logged in as <a href="%1$s">%2$s</a>. <a href="%3$s" title="Log out of this account">Log out?</a>', 'ideustheme' ), admin_url( 'profile.php' ), $user_identity, wp_logout_url( apply_filters( 'the_permalink', get_permalink( ) ) ) ) . '</p>',
+
+		'comment_notes_before' => '<p class="b-comments__commentNotes text-small">' . __( 'Your email address will not be published.', 'ideustheme' ) . ( $req ? $required_text : '' ) . '</p>',
+
+    'title_reply_before' => '<h3 id="reply-title" class="b-comments__replyTitle">',
+
+    'submit_field' => '<p class="b-comments__formSubmit">%1$s %2$s</a>',
+	);
+	?>
+
+	<?php comment_form( $comment_form_args ); ?>
+
+
+      </div> <!-- b-comments -->
+    </section>
+

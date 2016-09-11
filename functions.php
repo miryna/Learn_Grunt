@@ -19,12 +19,13 @@ $it_require = array(
   '/mu-plugins/news-custom_post_type.php',
   '/mu-plugins/ru-translit-urls.php',
   '/mu-plugins/date_to_russian.php',
-  /* '/mu-plugins/removing.php',*/
+  // '/mu-plugins/removing.php',
 
   '/inc/vendor/Mobile_Detect.php',
   '/inc/Class-Walker-Nav-Menu-Custom-LI-A.php',
   '/inc/WP_Widget_All_Post_Types.php',
   '/inc/WP_Widget_Single_Post_or_Page.php',
+  '/inc/Ideustheme_Walker_Comment.php',
 );
 
 foreach ($it_require as $file) {
@@ -59,13 +60,12 @@ if (function_exists('add_theme_support')) {
 
 
 if (function_exists('add_image_size')) {
+
   add_image_size('large', 770, '425', true); // Large Thumbnail
   add_image_size('medium', 370, '203', true); // Medium Thumbnail
   add_image_size('small', 123, '86', true); // Small Thumbnail
 }
 
-
-add_filter('image_size_names_choose', 'ideustheme_custom_sizes');
 
 function ideustheme_custom_sizes($sizes)
 {
@@ -76,6 +76,7 @@ function ideustheme_custom_sizes($sizes)
   ));
 }
 
+add_filter('image_size_names_choose', 'ideustheme_custom_sizes');
 
 /*------------------------------------*\
 	Load  scripts
@@ -178,6 +179,14 @@ function ideustheme_scripts_enqueue_js_main_extra()
 add_action('wp_enqueue_scripts', 'ideustheme_scripts_enqueue_js_main_extra');
 */
 
+// Moving comment form to reply. Used in tree comments
+function ideustheme_enqueue_comment_reply()
+{
+  if (is_singular() && comments_open() && (get_option('thread_comments') == 1))
+    wp_enqueue_script('comment-reply');
+}
+
+add_action('wp_enqueue_scripts', 'ideustheme_enqueue_comment_reply');
 
 /*------------------------------------*\
 	Load styles and fonts
@@ -359,15 +368,6 @@ add_filter('document_title_separator', function () {
 });
 
 
-// Custom excerpt ellipses
-function custom_excerpt_more()
-{
-  return '… →';
-}
-
-add_filter('excerpt_more', 'custom_excerpt_more');
-
-
 // link Read more
 function ideustheme_read_more()
 {
@@ -389,3 +389,15 @@ function ideustheme_wpsearch()
 	  </form>';
   return $form;
 }
+
+function ideustheme_before_comments_form()
+{
+  ?>
+  <div class="b-comments__beforeForm">
+    <div class="b-comments__beforeFormTitle"><?php _e('Leave Comment', 'ideustheme'); ?></div>
+  </div>
+
+<?php
+}
+
+add_action('comment_form_before', 'ideustheme_before_comments_form');

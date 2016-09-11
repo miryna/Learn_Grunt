@@ -15,7 +15,7 @@ get_header(); ?>
 
 
       <?php if ( has_post_thumbnail()) { ?>
-           <?php the_post_thumbnail('post-thumbnail', 'class="b-post__thumb"'); ?>
+           <?php the_post_thumbnail('post-thumbnail', 'class=b-post__thumb'); ?>
       <?php } ?>
 
       <h1 class="b-post__title"><?php the_title(); ?></h1>
@@ -52,17 +52,14 @@ get_header(); ?>
     </div><!-- #post-<?php the_ID(); ?> -->
   </section>
 
-  <div class="l-comments">
-    <div class="b-comments" id="comments">
+
     <?php
       // If comments are open or we have at least one comment, load up the comment template.
       if ( comments_open() || get_comments_number() ) :
-         comments_template( '', true );
+         comments_template( '/comments.php', true );
       endif;
     ?>
 
-    </div>
-  </div>
 
 <?php endwhile; ?>
 
