@@ -22,7 +22,7 @@ get_header(); ?>
 
 
       <div class="b-post__content b-text">
-        <p><?php the_content(); ?></p>
+        <?php the_content(); ?>
       </div>
 
       <ul class="b-postMeta">

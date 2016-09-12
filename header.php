@@ -96,7 +96,7 @@ $isHomepage = (basename($_SERVER['PHP_SELF']) == 'index.php');
 
       <div class="l-siteSearch">
         <div class="b-siteSearch">
-          <a class="b-siteSearch__link js-searchShow" href="#" title="Искать"><i class="fa fa-search"></i></a>
+          <a class="b-siteSearch__link js-searchShow" href="javascript:searchBox()" title="Искать"><i class="fa fa-search"></i></a>
 
           <div class="b-siteSearch__form js-searchForm">
 
@@ -111,21 +111,24 @@ $isHomepage = (basename($_SERVER['PHP_SELF']) == 'index.php');
     <div class="l-siteSubHeader">
       <div class="b-siteSubHeader">
 
-        <?php if (!is_single()){ ?>
+        <?php if (!is_singular()){ ?>
         <?php $tag = (!is_front_page()) ? 'h1' : 'div'; ?>
         <<?php echo $tag; ?> class="b-siteSubHeader__title">
 
-        <?php if (is_front_page()): ?>
+        <?php if (is_front_page()){ ?>
           <?php echo _e('Home', 'ideustheme'); ?>
 
-        <?php elseif (is_archive()): ?>
+        <?php } elseif (is_archive()){ ?>
           <?php single_term_title('', true); ?>
 
-        <?php
-        else: ?>
-          <?php echo wp_title(); ?>
+        <?php } elseif (is_search()) { ?>
+          <?php echo get_search_query(); ?>
 
-        <?php endif; //inner if ?>
+        <?php
+        } else { ?>
+          <?php echo ''; ?>
+
+        <?php } ?>
 
       </<?php echo $tag; ?>>
       <?php } //!is_single() ?>

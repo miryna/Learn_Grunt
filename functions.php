@@ -324,12 +324,13 @@ if (function_exists('register_sidebar')) {
   function ideustheme_register_widgets1()
   {
     register_sidebar(array(
-      'name' => __('Widget Area1', ' ideustheme'),
-      'description' => __('widget area 1 for your site', ' ideustheme'),
+      'name' => __('Widget Area 1', ' ideustheme'),
+      'description' => __('widget area for your site', ' ideustheme'),
       'id' => 'side1',
-      'before_widget' => '<div id="%1$s"  class="%2$s">',
+      'class' => 'l-sidebar sideCentered',
+      'before_widget' => '<div id="%1$s"  class="b-sideCentered %2$s b-widget">',
       'after_widget' => "</div>",
-      'before_title' => '<h2  class="b-about__title">',
+      'before_title' => '<h2  class="b-about__title titleCentered">',
       'after_title' => '</h2>'
     ));
   }
@@ -344,11 +345,11 @@ if (function_exists('register_sidebar')) {
   function ideustheme_register_widgets2()
   {
     register_sidebar(array(
-      'name' => __('Widget Area2', ' ideustheme'),
+      'name' => __('Widget Area 2', ' ideustheme'),
       'id' => 'side2',
-      'description' => __('widget area 2 for your site', ' ideustheme'),
+      'description' => __('widget area for your site', ' ideustheme'),
       'class' => 'l-sidebar',
-      'before_widget' => '<div class="b-sidebarBlock -style_%2$s">',
+      'before_widget' => '<div id="%1$s" class="b-sidebarBlock -style_%2$s b-widget">',
       'after_widget' => "</div>",
       'before_title' => '<h2  class="b-sidebarBlock__title">',
       'after_title' => "</h2>",

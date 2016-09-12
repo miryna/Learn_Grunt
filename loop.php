@@ -14,7 +14,7 @@ if (have_posts()): while (have_posts()) : the_post(); ?>
     <div id="post-<?php the_ID(); ?>" <?php post_class('b-post -type_archive'); ?> >
 
 
-      <?php if (has_post_thumbnail()) { ?>
+      <?php if (has_post_thumbnail() && !is_search() ) { ?>
         <a class="b-post__thumbLink" href="<?php the_permalink(); ?>" alt="<?php the_title_attribute(); ?>">
           <?php the_post_thumbnail('post-thumbnail', 'class=b-post__thumb'); ?>
         </a>
@@ -22,22 +22,21 @@ if (have_posts()): while (have_posts()) : the_post(); ?>
 
       <h2 class="b-post__title"><?php the_title(); ?></h2>
 
-      <?php /* if ( is_archive() || is_search() ) : // Only display Excerpts for archives & search */ ?>
+      <?php if (is_singular()) { ?>
 
-      <div class="b-post__content b-text">
-        <p><?php the_content('… →'); ?></p>
-      </div>
-
-      <?php echo ideustheme_read_more(); ?>
-
-      <?php /* else : ?>
-        <div>
-          <?php the_content( __( 'Continue reading', 'ideustheme' ) ); ?>
-
-          <?php wp_link_pages( array( 'before' => '<div class="page-link">' . __( 'Pages:', 'ideustheme' ), 'after' => '</div>' ) ); ?>
+        <div class="b-post__content b-text js-fancybox ">
+          <?php the_content(); ?>
         </div>
-      <?php endif; */
-      ?>
+
+      <?php } else { ?>
+
+        <div class="b-post__content b-text">
+          <?php the_content('… →'); ?>
+        </div>
+
+        <?php echo ideustheme_read_more(); ?>
+
+      <?php } ?>
 
       <ul class="b-postMeta">
         <?php
@@ -62,12 +61,12 @@ if (have_posts()): while (have_posts()) : the_post(); ?>
         </div>
       </div>
 
-
     </div>
-    <!-- #post-<?php the_ID(); ?> -->
   </section>
 
   <?php comments_template('', true); ?>
+
+  <?php wp_link_pages(array('before' => '<div class="page-link">' . __('Pages:', 'ideustheme'), 'after' => '</div>')); ?>
 
 <?php endwhile; ?>
 
@@ -75,8 +74,8 @@ if (have_posts()): while (have_posts()) : the_post(); ?>
 
   <section class="l-post">
     <div class="b-post__content b-text">
-    <p b-text><?php _e('Sorry, nothing to display.', 'ideustheme'); ?></p>
-      </div>
+      <p><?php _e('Sorry, nothing to display.', 'ideustheme'); ?></p>
+    </div>
   </section>
 
 

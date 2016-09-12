@@ -10,7 +10,6 @@ License:            MIT License
 License URI:        http://opensource.org/licenses/MIT
 */
 
-
 /**
  * l-comments
  *
@@ -117,91 +116,90 @@ License URI:        http://opensource.org/licenses/MIT
  *
  */
 
-.l-comment{
+.l-comment {
     margin-bottom: 20px;
     list-style-type: none;
 }
 
-.l-comment ul{
+.l-comment ul {
     margin-top: 20px;
 }
 
-.b-comment{
+.b-comment {
     position: relative;
 }
 
-.b-comment::after{
+.b-comment::after {
     position: absolute;
     bottom: 0;
     height: 1px;
     width: 100px;
     content: "";
-    border-bottom: 1px solid  #e1e1e1;
+    border-bottom: 1px solid #e1e1e1;
 }
 
 .b-comment__metaItem,
-.b-comments__replyTitle{
+.b-comments__replyTitle {
     display: inline-block;
-    font: italic normal 14px/24px Roboto,Arial,Helvetica Neue,Helvetica,sans-serif;
+    font: italic normal 14px/24px Roboto, Arial, Helvetica Neue, Helvetica, sans-serif;
 }
 
-.b-comments__replyTitle small{
+.b-comments__replyTitle small {
     font-size: 100%;
 }
 
-.b-comments__replyTitle{
-   margin-top: 10px;
+.b-comments__replyTitle {
+    margin-top: 10px;
 }
 
-.b-comment__metaData{
-   position: absolute;
+.b-comment__metaData {
+    position: absolute;
     top: 10px;
     right: 0;
 }
 
 .b-comment__metaData .b-comment__author,
-.b-comment__metaData .b-comment__datetime{
+.b-comment__metaData .b-comment__datetime {
     color: #b4b4b4;
     margin: 0 0 0 10px;
     padding: 0 0 0 30px;
 }
 
-.b-comment__metaData .b-comment__author{
-  width: 88px;
-  overflow: hidden;
-  background: rgba(0, 0, 0, 0) url("assets/img/postMeta__item-ico.png") no-repeat scroll 0 -100px;
+.b-comment__metaData .b-comment__author {
+    width: 88px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0) url("assets/img/postMeta__item-ico.png") no-repeat scroll 0 -100px;
 }
 
-.b-comment__metaData .b-comment__datetime{
+.b-comment__metaData .b-comment__datetime {
     width: 80px;
     overflow: hidden;
     background: rgba(0, 0, 0, 0) url("assets/img/postMeta__item-ico.png") no-repeat scroll 0 0;
 }
 
-.b-comment__metaLinks .b-comment__metaItem{
+.b-comment__metaLinks .b-comment__metaItem {
     margin-right: 15px;
 }
 
-.b-comment__metaLinks{
+.b-comment__metaLinks {
     margin-top: -10px;
     padding-bottom: 10px;
 }
 
 .b-comment__metaLinks a,
-.b-comments__replyTitle a{
+.b-comments__replyTitle a {
     color: #e54241;
     text-decoration: none;
 }
 
 .b-comment__metaLinks a:hover,
-.b-comments__replyTitle a:hover{
+.b-comments__replyTitle a:hover {
     color: #eb6f6e;
 }
 
-.b-comment__content{
-    font: 14px/24px Roboto Slab,serif;
+.b-comment__content {
+    font: 14px/24px Roboto Slab, serif;
 }
-
 
 /**
  * l-widget
@@ -209,9 +207,48 @@ License URI:        http://opensource.org/licenses/MIT
  *
  */
 
+.b-widget {
+    margin: 24px 0 0;
+    padding: 22px 0 0;
+    position: relative;
+    color: #36383d;
+    font: 14px/24px Roboto Slab, serif;
+}
 
+.b-widget a {
+    color: #e54241;
+    text-decoration: none;
+}
 
+.b-widget a:hover {
+    color: #eb6f6e;
+}
 
+.b-widget ul {
+    padding-right: 24px;
+}
 
+.b-sidebarBlock::before {
+    background: #e1e1e1 none repeat scroll 0 0;
+    content: "";
+    height: 1px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 123px;
+}
 
+.b-sideCentered{
+    text-align: center;
+}
 
+/**
+ * Other
+ *
+ *
+ */
+
+.b-post__content a.more-link {
+    color: #36383d;
+    text-decoration: none;
+}

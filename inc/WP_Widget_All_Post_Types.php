@@ -118,13 +118,13 @@ class WP_Widget_All_Post_Types extends WP_Widget
 
       <li class="b-lastNews__item">
 
-        <a class="b-lastNews__thumbLink" target="_blank" href="<?php echo $this_external_link; ?> ">
+        <a class="b-lastNews__thumbLink js-fancybox" href="<?php echo $this_external_link; ?> ">
           <?php the_post_thumbnail('post-thumbnail', 'b-lastNews__thumb"'); ?>
         </a>
 
         <div class="b-lastNews__content">
           <h3 class="b-lastNews__name">
-            <a class="b-lastNews__nameLink" target="_blank" href="<?php  echo $this_external_link; ?> "> <?php the_title(); ?>
+            <a class="b-lastNews__nameLink js-fancybox" href="<?php  echo $this_external_link ?>"> <?php the_title(); ?>
             </a>
           </h3>
 
